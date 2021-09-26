@@ -80,7 +80,8 @@ class ITrackerData(data.Dataset):
         self.faceMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_face_224.mat'))['image_mean']
         self.eyeLeftMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_left_224.mat'))['image_mean']
         self.eyeRightMean = loadMetadata(os.path.join(MEAN_PATH, 'mean_right_224.mat'))['image_mean']
-        
+        print("faceMean####",self.faceMean)
+
         self.transformFace = transforms.Compose([
             transforms.Resize(self.imSize),
             transforms.ToTensor(),
@@ -155,6 +156,15 @@ class ITrackerData(data.Dataset):
         faceGrid = torch.FloatTensor(faceGrid)
         gaze = torch.FloatTensor(gaze)
 
+        # if self.metadata['frameIndex'][index]==0:
+        #     print("##############################33333")
+        #     print("row", row, row.size())
+        #     print("imFace", imFace, imFace.size())
+        #     print("imEyeL", imEyeL, imEyeL.size())
+        #     print("imEyeR", imEyeR, imEyeR.size())
+        #     print("faceGrid", faceGrid, faceGrid.size())
+        #     print("gaze", gaze, gaze.size())
+        
         return row, imFace, imEyeL, imEyeR, faceGrid, gaze
     
         

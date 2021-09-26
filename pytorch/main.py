@@ -210,6 +210,11 @@ def validate(val_loader, model, criterion, epoch):
 
     oIndex = 0
     for i, (row, imFace, imEyeL, imEyeR, faceGrid, gaze) in enumerate(val_loader):
+
+        # print("imFace##############",torch.max(imFace),torch.min(imFace))
+        # print("imEyeL##############",torch.max(imEyeL),torch.min(imEyeL))
+        # print("imEyeR##############",torch.max(imEyeR),torch.min(imEyeR))
+        # print("faceGrid##############",faceGrid)
         # measure data loading time
         data_time.update(time.time() - end)
         imFace = imFace.cuda()
@@ -223,6 +228,10 @@ def validate(val_loader, model, criterion, epoch):
         imEyeR = torch.autograd.Variable(imEyeR, requires_grad = False)
         faceGrid = torch.autograd.Variable(faceGrid, requires_grad = False)
         gaze = torch.autograd.Variable(gaze, requires_grad = False)
+
+        # print("shape_main")
+        # print(imFace.size(), imEyeL.size(), imEyeR.size(), faceGrid.size())
+        # print(faceGrid)
 
         # compute output
         with torch.no_grad():
